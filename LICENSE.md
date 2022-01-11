@@ -1,0 +1,1 @@
+*See the [COPYING](./COPYING) file!*
