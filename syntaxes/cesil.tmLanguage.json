@@ -1,0 +1,186 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "Cesil",
+	"patterns": [
+		{ "include": "#data-segment" },
+		{ "include": "#code-segment" }
+	],
+	"repository": {
+		"data-segment": {
+			"begin": "^%$",
+			"end": "^\\*$",
+			"patterns": [
+				{
+					"match": "^[\\+-]?\\d+$",
+					"name": "constant.numeric.cesil"
+				},
+				{
+					"match": "[^\\+-\\d%\\*]",
+					"name": "invalid.deprecated.cesil"
+				}
+			]
+		},
+		"code-segment": {
+			"patterns": [
+				{ "include": "#statements-no-label" },
+				{ "include": "#statements-label"    }
+			]
+		},
+		"statements-label": {
+			"patterns": [
+				{
+					"_name_": "=== LABEL HALT ===",
+					"match": "(\\w+)\\s+(HALT)\\s*",
+					"captures": {
+						"1": { "name": "entity.name.type.cesil" },
+						"2": { "name": "keyword.control.cesil" }
+					}
+				},
+				{
+					"_name_": "=== LABEL JUMP lb ===",
+					"match": "(\\w+)\\s+(JUMP|JINEG|JIZERO)\\s+(\\w+)\\s*",
+					"captures": {
+						"1": { "name": "entity.name.type.cesil" },
+						"2": { "name": "keyword.control.cesil" },
+						"3": { "name": "entity.name.type.cesil" }
+					}
+				},
+				{
+					"_name_": "=== LABEL MATH literal ===",
+					"match": "(\\w+)\\s+(ADD|SUBTRACT|MULTIPLY|DIVIDE)\\s+([\\+-]?\\d+)\\s*",
+					"captures": {
+						"1": { "name": "entity.name.type.cesil" },
+						"2": { "name": "entity.name.function.cesil" },
+						"3": { "name": "constant.numeric.cesil" }
+					}
+				},
+				{
+					"_name_": "=== LABEL MATH location ===",
+					"match": "(\\w+)\\s+(ADD|SUBTRACT|MULTIPLY|DIVIDE)\\s+(\\w+)\\s*",
+					"captures": {
+						"1": { "name": "entity.name.type.cesil" },
+						"2": { "name": "entity.name.function.cesil" },
+						"3": { "name": "variable.other.cesil" }
+					}
+				},
+				{
+					"_name_": "=== LABEL LOAD numeric ===",
+					"match": "(\\w+)\\s+(LOAD)\\s+([\\+-]?\\d+)\\s*",
+					"captures": {
+						"1": { "name": "entity.name.type.cesil" },
+						"2": { "name": "entity.name.function.cesil" },
+						"3": { "name": "constant.numeric.cesil" }
+					}
+				},
+				{
+					"_name_": "=== LABEL STACT location ===",
+					"match": "(\\w+)\\s+(LOAD|STORE)\\s+(\\w+)\\s*",
+					"captures": {
+						"1": { "name": "entity.name.type.cesil" },
+						"2": { "name": "entity.name.function.cesil" },
+						"3": { "name": "variable.other.cesil" }
+					}
+				},
+				{
+					"_name_": "=== LABEL fnc ===",
+					"match": "(\\w+)\\s+(IN|OUT|LINE)\\s*",
+					"captures": {
+						"1": { "name": "entity.name.type.cesil" },
+						"2": { "name": "entity.name.function.cesil" }
+					}
+				},
+				{
+					"_name_": "=== LABEL UIN ===",
+					"match": "(\\w+)\\s+(UIN)\\s*",
+					"captures": {
+						"1": { "name": "entity.name.type.cesil" },
+						"2": { "name": "support.function.cesil" }
+					}
+				},
+				{
+					"_name_": "=== LABEL PRINT d ===",
+					"match": "(\\w+)\\s+(PRINT)\\s+(\".*\")\\s*",
+					"captures": {
+						"1": { "name": "entity.name.type.cesil" },
+						"2": { "name": "entity.name.function.cesil" },
+						"3": { "name": "string.quoted.single.cesil" }
+					}
+				}
+			]
+		},
+		"statements-no-label": {
+			"patterns": [
+				{
+					"name": "comment.line.character.cesil",
+					"match": "^\\(.*$"
+				},
+				{
+					"_name_": "=== HALT ===",
+					"match": "\\s+(HALT)\\s*",
+					"captures": {
+						"1": { "name": "keyword.control.cesil" }
+					}
+				},
+				{
+					"_name_": "=== JUMP lb ===",
+					"match": "\\s+(JUMP|JINEG|JIZERO)\\s+(\\w+)\\s*",
+					"captures": {
+						"1": { "name": "keyword.control.cesil" },
+						"2": { "name": "entity.name.type.cesil" }
+					}
+				},
+				{
+					"_name_": "=== MATH literal ===",
+					"match": "\\s+(ADD|SUBTRACT|MULTIPLY|DIVIDE)\\s+([\\+-]?\\d+)\\s*",
+					"captures": {
+						"1": { "name": "entity.name.function.cesil" },
+						"2": { "name": "constant.numeric.cesil" }
+					}
+				},
+				{
+					"_name_": "=== MATH location ===",
+					"match": "\\s+(ADD|SUBTRACT|MULTIPLY|DIVIDE)\\s+(\\w+)\\s*",
+					"captures": {
+						"1": { "name": "entity.name.function.cesil" },
+						"2": { "name": "variable.other.cesil" }
+					}
+				},
+				{
+					"_name_": "=== LOAD numeric ===",
+					"match": "\\s+(LOAD)\\s+([\\+-]?\\d+)\\s*",
+					"captures": {
+						"1": { "name": "entity.name.function.cesil" },
+						"2": { "name": "constant.numeric.cesil" }
+					}
+				},
+				{
+					"_name_": "=== STACT location ===",
+					"match": "\\s+(LOAD|STORE)\\s+(\\w+)\\s*",
+					"captures": {
+						"1": { "name": "entity.name.function.cesil" },
+						"2": { "name": "variable.other.cesil" }
+					}
+				},
+				{
+					"_name_": "=== fnc ===",
+					"match": "\\s+(IN|OUT|LINE)\\s*",
+					"name": "entity.name.function.cesil"
+				},
+				{
+					"_name_": "=== UIN ===",
+					"match": "\\s+(UIN)\\s*",
+					"name": "support.function.cesil"
+				},
+				{
+					"_name_": "=== PRINT d ===",
+					"match": "\\s+(PRINT)\\s+(\".*\")\\s*",
+					"captures": {
+						"1": { "name": "entity.name.function.cesil" },
+						"2": { "name": "string.quoted.single.cesil" }
+					}
+				}
+			]
+		}
+	},
+	"scopeName": "source.ces"
+}

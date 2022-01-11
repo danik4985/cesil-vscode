@@ -1,0 +1,25 @@
+{
+    "name": "cesil-lang",
+    "displayName": "cesil-lang",
+    "description": "Add cesil language support",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.63.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "contributes": {
+        "languages": [{
+            "id": "cesil",
+            "aliases": ["Cesil", "cesil"],
+            "extensions": [".ces"],
+            "configuration": "./language-configuration.json"
+        }],
+        "grammars": [{
+            "language": "cesil",
+            "scopeName": "source.ces",
+            "path": "./syntaxes/cesil.tmLanguage.json"
+        }]
+    }
+}
